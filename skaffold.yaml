@@ -12,12 +12,12 @@ build:
         dockerfile: Dockerfile
     - image: ajay404/ticketing-client
       context: client
-      docker:
-        dockerfile: Dockerfile
       sync:
         manual:
-          - src: "**/*.js"
+          - src: '**/*.js'
             dest: .
+      docker:
+        dockerfile: Dockerfile
   local:
     push: false
 manifests:
