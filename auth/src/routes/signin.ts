@@ -1,11 +1,9 @@
 import express, { Request, Response } from 'express';
 import { body } from 'express-validator';
-import { validateRequest } from '../middlewares/validate-request';
+import { validateRequest, BadRequestError } from '@ajay404/common';
 import { User } from '../models/user';
-import { BadRequestError } from '../errors/bad-request-error';
 import { Password } from '../services/password';
 import jwt from 'jsonwebtoken';
-
 
 const router = express.Router();
 
@@ -33,10 +31,10 @@ router.get(
       password
     );
 
-    if(!passwordsMatch){
+    if (!passwordsMatch) {
       throw new BadRequestError('Invalid credentials');
     }
-    
+
     const userJWT = jwt.sign(
       {
         id: existingUser._id,

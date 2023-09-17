@@ -1,5 +1,5 @@
 import express from 'express';
-import { currentUser } from '../middlewares/current-user-middleware';
+import { currentUser } from '@ajay404/common';
 
 const router = express.Router();
 
