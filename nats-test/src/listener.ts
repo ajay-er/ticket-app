@@ -15,13 +15,13 @@ client.on('connect', () => {
     process.exit();
   });
 
-  const options = client.subscriptionOptions().setManualAckMode(true);
+  const options = client
+    .subscriptionOptions()
+    .setManualAckMode(true)
+    .setDeliverAllAvailable()
+    .setDurableName('order-service');//for send a aknowledgement to nats server
 
-  const subscribtion = client.subscribe(
-    'ticket:created',
-    'orders-service-queue-group',
-    options
-  );
+  const subscribtion = client.subscribe('ticket:created', options);
 
   subscribtion.on('message', (msg: Message) => {
     const data = msg.getData();
